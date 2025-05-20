@@ -16,8 +16,8 @@ function crossover(g1, g2) {
 // Randomly change some features slightly
 function mutate(genome) {
   return genome.map(w =>
-    Math.random() < 0.2
-      ? w + (Math.random() * 2 - 1) * 0.5
+    Math.random() < 0.1
+      ? w + (Math.random() * 2 - 1) * 0.1
       : w
   );
 }

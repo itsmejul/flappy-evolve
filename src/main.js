@@ -8,8 +8,24 @@ let pipes = [];
 let birds = [];
 let frame = 0;
 let epoch = 1;
+let alive = 1000;
+let paused = false;
 const epochTextField = document.getElementById("epoch"); 
 epochTextField.innerText = `Epoch ${epoch}`;
+const aliveTextField = document.getElementById("alivecount");
+aliveTextField.innerText = `Alive: ${alive};`
+
+document.addEventListener("DOMContentLoaded", function(){
+    document.getElementById("pauseButton").addEventListener("click", function(){changePaused()});
+})
+
+function changePaused(){
+    paused = !paused
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+    document.getElementById("restartButton").addEventListener("click",function(){ resetGame()});
+})
 
 function initPipes() {
     pipes = []
@@ -20,9 +36,11 @@ function initPipes() {
     }
 }
 
+
+
 // For the first epoch, all birds genomes are random
 function initBirdsRandom(){
-    for(let i = 0; i < 100; i++){
+    for(let i = 0; i < 1000; i++){
         let bird = new Bird(canvas.height / 2, randomGenome());
         birds.push(bird);
     }
@@ -70,8 +88,9 @@ function updateBirds(){
 
     //check if all birds died, if yes start new Epoch
     const aliveCount = birds.filter(b => b.alive).length;
+    aliveTextField.innerText = `Alive: ${aliveCount}`
     //console.log(aliveCount);
-    if (aliveCount == 0){
+    if (aliveCount == 0 || frame > 1500){ //force a new epoch every 1500 frames 
         resetEpoch();
     }
 }
@@ -82,6 +101,21 @@ function resetEpoch(){
     epoch++;
     frame = 0;
     epochTextField.innerText = `Epoch ${epoch}`;
+}
+
+function resetGame(){
+    console.log("reset");
+    pipes = [];
+    birds = [];
+    frame = 0;
+    epoch = 1;
+    alive = 1000;
+    paused = false;
+    epochTextField.innerText = `Epoch: ${epoch}`
+    aliveTextField.innerText = `Alive: ${alive}`
+    initPipes();
+    initBirdsRandom();
+
 }
 
 function findCurrentPipe(){
@@ -98,12 +132,17 @@ function drawPipesAndBirds(){
 }
 
 function loop(){
-    ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
-    updatePipes();
-    updateBirds();
-    drawPipesAndBirds();
+    console.log(paused)
+    if(!paused){
+
+        ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
+        updatePipes();
+        updateBirds();
+        drawPipesAndBirds();
+        //requestAnimationFrame(loop);
+        frame++;
+    }
     requestAnimationFrame(loop);
-    frame++;
 }
 
 initPipes();

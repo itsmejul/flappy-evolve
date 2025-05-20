@@ -15,18 +15,20 @@ export class Bird {
     }
 
     update(normGap, normDist){
-        let normY = (this.y / 600)*2 - 1;
-        let inputs = [this.y, this.velocity, normGap, normDist];
-        let diff = (normGap - normY) / 2;
+        if (this.alive){
 
-        console.log(diff);
-        inputs = [diff, normDist] // Currently best performing setup with just height difference and distance as inputs
-        const out = this.mlp.forward(inputs);
-        if (out > 0.5) {
-            this.velocity = -8; // If mlp outputs 1, the bird will jump
+            let normY = (this.y / 600)*2 - 1;
+            let inputs = [this.y, this.velocity, normGap, normDist];
+            let diff = (normGap - normY) / 2;
+
+            inputs = [diff, normDist] // Currently best performing setup with just height difference and distance as inputs
+            const out = this.mlp.forward(inputs);
+            if (out > 0.5) {
+                this.velocity = -8; // If mlp outputs 1, the bird will jump
+            }
+            this.velocity += 0.5; // Apply gravity upwards since y-coords are inverted
+            this.y += this.velocity; // Move bird according to velocity
         }
-        this.velocity += 0.5; // Apply gravity upwards since y-coords are inverted
-        this.y += this.velocity; // Move bird according to velocity
     }
 
     draw(ctx){
