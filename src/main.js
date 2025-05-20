@@ -1,19 +1,21 @@
 import { Pipe } from './pipe.js';
 import { Bird , inputSize, hiddenSize} from './bird.js';
 import { randomGenome , generateNewBirdsGenetic} from './genetic_utils.js';
-import { canvas, ctx } from './consts.js';
+import { canvas, ctx , getBirdsPerEpoch, setBirdsPerEpoch} from './consts.js';
 
 const birdX = 150; // x-position of the birds, which are constant
 let pipes = [];
 let birds = [];
 let frame = 0;
 let epoch = 1;
-let alive = 1000;
+let alive = getBirdsPerEpoch();
 let paused = false;
 const epochTextField = document.getElementById("epoch"); 
 epochTextField.innerText = `Epoch ${epoch}`;
 const aliveTextField = document.getElementById("alivecount");
 aliveTextField.innerText = `Alive: ${alive};`
+const scoreTextField = document.getElementById("score");
+scoreTextField.innerText = `Score: ${frame}`;
 
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("pauseButton").addEventListener("click", function(){changePaused()});
@@ -40,7 +42,7 @@ function initPipes() {
 
 // For the first epoch, all birds genomes are random
 function initBirdsRandom(){
-    for(let i = 0; i < 1000; i++){
+    for(let i = 0; i < getBirdsPerEpoch(); i++){
         let bird = new Bird(canvas.height / 2, randomGenome());
         birds.push(bird);
     }
@@ -101,9 +103,12 @@ function resetEpoch(){
     epoch++;
     frame = 0;
     epochTextField.innerText = `Epoch ${epoch}`;
+    scoreTextField.innerText = `Score: ${frame}`;
 }
 
 function resetGame(){
+    const newBirdsPerEpoch = document.getElementById("numBirdsSelect").value;
+    setBirdsPerEpoch(parseInt(newBirdsPerEpoch));
     console.log("reset");
     pipes = [];
     birds = [];
@@ -111,8 +116,9 @@ function resetGame(){
     epoch = 1;
     alive = 1000;
     paused = false;
-    epochTextField.innerText = `Epoch: ${epoch}`
-    aliveTextField.innerText = `Alive: ${alive}`
+    epochTextField.innerText = `Epoch: ${epoch}`;
+    aliveTextField.innerText = `Alive: ${alive}`;
+    scoreTextField.innerText = `Score: ${frame}`;
     initPipes();
     initBirdsRandom();
 
@@ -141,6 +147,7 @@ function loop(){
         drawPipesAndBirds();
         //requestAnimationFrame(loop);
         frame++;
+    scoreTextField.innerText = `Score: ${frame}`;
     }
     requestAnimationFrame(loop);
 }

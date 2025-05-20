@@ -1,5 +1,5 @@
 import { inputSize, hiddenSize , Bird} from "./bird.js";
-import { canvas } from "./consts.js";
+import { canvas , getBirdsPerEpoch } from "./consts.js";
     
 // Generate a random Genome
 // In our model, a genome is just an Array where each value is in [-1, 1] and represents one weight in the MLP
@@ -28,13 +28,13 @@ export function generateNewBirdsGenetic(birds){
     .sort((a, b) => b.fitness - a.fitness);
 
     //best ten birds stay the same
-    for (let i = 0; i < 10; i ++){
+    for (let i = 0; i < 0; i ++){
         nextGen.push(sortedBirds[0], sortedBirds[1]);
     }
     // Filter top 10 birds genomes
     const topGenomes = sortedBirds.slice(0, 10).map(bird => bird.genome);
     // Run crossover
-    while (nextGen.length < 1000) {
+    while (nextGen.length < getBirdsPerEpoch()) {
         const parent1 = topGenomes[Math.floor(Math.random() * topGenomes.length)];
         const parent2 = topGenomes[Math.floor(Math.random() * topGenomes.length)];
         nextGen.push(new Bird(canvas.height / 2, crossover(parent1, parent2)));

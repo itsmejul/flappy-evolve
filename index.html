@@ -10,7 +10,15 @@
   <canvas id="gameCanvas" width="600" height="600"></canvas>
   <p id="epoch"></p>
   <p id="alivecount"></p>
+  <p id = "score"></p>
   <button id="pauseButton">Play/Pause</button>
+  <label for="numBirdsSelect">Number of birds per epoch:</label>
+  <select id="numBirdsSelect">
+    <option value="100">100</option>
+    <option value="500">500</option>
+    <option value="1000">1000</option>
+  </select>
+  <p>Restart the simulation for changed parameters to take effect</p>
   <button id="restartButton">Restart</button>
   <script type="module" src="./src/main.js"></script>
   <link rel="icon" href="data:,">
