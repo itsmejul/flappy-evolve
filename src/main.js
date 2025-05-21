@@ -1,7 +1,7 @@
 import { Pipe } from './pipe.js';
-import { Bird , inputSize, hiddenSize} from './bird.js';
+import { Bird , hiddenSize} from './bird.js';
 import { randomGenome , generateNewBirdsGenetic} from './genetic_utils.js';
-import { canvas, ctx , getBirdsPerEpoch, setBirdsPerEpoch} from './consts.js';
+import { canvas, ctx , getBirdsPerEpoch, setBirdsPerEpoch, setInputFeatures,getInputFeatures} from './consts.js';
 
 const birdX = 150; // x-position of the birds, which are constant
 let pipes = [];
@@ -17,6 +17,8 @@ aliveTextField.innerText = `Alive: ${alive};`
 const scoreTextField = document.getElementById("score");
 scoreTextField.innerText = `Score: ${frame}`;
 
+
+
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("pauseButton").addEventListener("click", function(){changePaused()});
 })
@@ -28,6 +30,21 @@ function changePaused(){
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("restartButton").addEventListener("click",function(){ resetGame()});
 })
+
+function getSelectedFeatures() {
+  const checkboxes = document.querySelectorAll('input[name="inputFeatures"]:checked');
+  let newInputFeatures = Array.from(checkboxes).map(cb => cb.value);
+
+  if (newInputFeatures.length === 0) {
+    alert("You must select at least one input feature.");
+    return;
+  }
+  setInputFeatures(newInputFeatures);
+  
+  
+}
+
+
 
 function initPipes() {
     pipes = []
@@ -108,8 +125,9 @@ function resetEpoch(){
 
 function resetGame(){
     const newBirdsPerEpoch = document.getElementById("numBirdsSelect").value;
+    getSelectedFeatures();
     setBirdsPerEpoch(parseInt(newBirdsPerEpoch));
-    console.log("reset");
+    //console.log("reset");
     pipes = [];
     birds = [];
     frame = 0;
@@ -138,7 +156,7 @@ function drawPipesAndBirds(){
 }
 
 function loop(){
-    console.log(paused)
+    //console.log(paused)
     if(!paused){
 
         ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);

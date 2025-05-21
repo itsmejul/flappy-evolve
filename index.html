@@ -18,6 +18,14 @@
     <option value="500">500</option>
     <option value="1000">1000</option>
   </select>
+  <form id="inputFeaturesSelect">
+    <label><input type="checkbox" name="inputFeatures" value="cHeight">Bird height</label><br>
+    <label><input type="checkbox" name="inputFeatures" value="pHeight">Next pipe height</label><br>
+    <label><input type="checkbox" name="inputFeatures" value="distance" checked>Distance to next pipe</label><br>
+    <label><input type="checkbox" name="inputFeatures" value="diff" checked>Height difference to next pipe</label><br>
+    <label><input type="checkbox" name="inputFeatures" value="velocity" unchecked>Bird velocity</label><br>
+  </form>
+
   <p>Restart the simulation for changed parameters to take effect</p>
   <button id="restartButton">Restart</button>
   <script type="module" src="./src/main.js"></script>
