@@ -5,13 +5,21 @@
   <style>
     canvas { border:1px solid black; display:block; margin:auto }
   </style>
+  
+  <link rel="stylesheet" href="style.css" >
 </head>
 <body>
+  <div class="wrapper">
+  <div class="panel">
   <canvas id="gameCanvas" width="600" height="600"></canvas>
+  </div>
+  <div class="panel">
   <p id="epoch"></p>
   <p id="alivecount"></p>
   <p id = "score"></p>
   <button id="pauseButton">Play/Pause</button>
+    <div class="subpanel">
+    <div class="subpanel-title">Change Simulation Parameters</div>
   <label for="numBirdsSelect">Number of birds per epoch:</label>
   <select id="numBirdsSelect">
     <option value="50">50</option>
@@ -25,6 +33,7 @@
     <option value="4">4</option>
     <option value="5">5</option>
   </select>
+  <div class="subpanel-title">Select input features</div>
   <form id="inputFeaturesSelect">
     <label><input type="checkbox" name="inputFeatures" value="cHeight">Bird height</label><br>
     <label><input type="checkbox" name="inputFeatures" value="pHeight">Next pipe height</label><br>
@@ -36,6 +45,8 @@
   <p>Restart the simulation for changed parameters to take effect</p>
   <button id="restartButton">Restart</button>
   <script type="module" src="./src/main.js"></script>
+  </div>
+  </div>
   <link rel="icon" href="data:,">
 </body>
 </html>
