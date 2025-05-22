@@ -1,7 +1,7 @@
 import { Pipe } from './pipe.js';
-import { Bird , hiddenSize} from './bird.js';
+import { Bird } from './bird.js';
 import { randomGenome , generateNewBirdsGenetic} from './genetic_utils.js';
-import { canvas, ctx , getBirdsPerEpoch, setBirdsPerEpoch, setInputFeatures,getInputFeatures} from './consts.js';
+import { canvas, ctx , getBirdsPerEpoch, setBirdsPerEpoch, setInputFeatures,getInputFeatures, setHiddenSize} from './consts.js';
 
 const birdX = 150; // x-position of the birds, which are constant
 let pipes = [];
@@ -125,6 +125,8 @@ function resetEpoch(){
 
 function resetGame(){
     const newBirdsPerEpoch = document.getElementById("numBirdsSelect").value;
+    const newHiddenSize = document.getElementById("hiddenSizeSelect").value;
+    setHiddenSize(newHiddenSize);
     getSelectedFeatures();
     setBirdsPerEpoch(parseInt(newBirdsPerEpoch));
     //console.log("reset");

@@ -1,10 +1,11 @@
-import { hiddenSize , Bird} from "./bird.js";
-import { canvas , getBirdsPerEpoch, getInputFeatures } from "./consts.js";
+import { Bird} from "./bird.js";
+import { canvas , getBirdsPerEpoch, getHiddenSize, getInputFeatures } from "./consts.js";
     
 // Generate a random Genome
 // In our model, a genome is just an Array where each value is in [-1, 1] and represents one weight in the MLP
 export function randomGenome() {
   let inputSize = getInputFeatures().length;
+  let hiddenSize = getHiddenSize();
   let l = inputSize * hiddenSize + hiddenSize + hiddenSize * 1 + 1;
   return Array.from({ length: l }, () => Math.random() * 2 - 1);
 }
