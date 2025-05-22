@@ -1,5 +1,7 @@
 # Flappy-Evolve
-An implementation of the genetic algorithm for flappy bird, using plain HTML and JavaScript.
+An implementation of the genetic algorithm for learning Flappy Bird, using plain HTML and JavaScript.
+Try it out here:  
+https://itsmejul.github.io/flappy-evolve/
 
 ## Running locally
 You can clone this repo via  
@@ -11,10 +13,6 @@ Then, run it by starting a http server, for example using python:
 python -m http.server 8000
 ```
 And then visit ``http://localhost:8000`` in your browser to see the simulation.
-
-## Features
-This implementation supports the selection of different input features (Current height, next pipe height, height difference, current velocity, distance to next pipe).
-It also supports Pausing and restarting the simulation with different parameters.
 
 ## Evolution of the birds
 Each "bird" consists of a small MLP with just one hidden layer, which will, during inference, receive the selected input features as inputs. The MLP has one output neuron where we use a sigmoid function to decide whether it should activate or not, based on the inputs. We run this inference once every frame for every bird.
