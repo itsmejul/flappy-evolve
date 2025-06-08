@@ -1,7 +1,9 @@
 # Flappy-Evolve
 An implementation of the genetic algorithm for learning Flappy Bird, using plain HTML and JavaScript.
 Try it out here:  
-https://itsmejul.github.io/flappy-evolve/
+https://itsmejul.github.io/flappy-evolve/  
+
+![Screenshot of Project](images/demo.jpg)
 
 ## Running locally
 You can clone this repo via  
