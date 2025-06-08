@@ -24,19 +24,19 @@
   <select id="numBirdsSelect">
     <option value="50">50</option>
     <option value="100">100</option>
-    <option value="200">200</option>
+    <option value="200" selected>200</option>
   </select>
   <label for="hiddenSizeSelect">Size of MLP hidden layer:</label>
   <select id="hiddenSizeSelect">
-    <option value="2">2</option>
+    <option value="2" selected>2</option>
     <option value="3">3</option>
     <option value="4">4</option>
     <option value="5">5</option>
   </select>
   <div class="subpanel-title">Select input features</div>
   <form id="inputFeaturesSelect">
-    <label><input type="checkbox" name="inputFeatures" value="cHeight">Bird height</label><br>
-    <label><input type="checkbox" name="inputFeatures" value="pHeight">Next pipe height</label><br>
+    <label><input type="checkbox" name="inputFeatures" value="cHeight" unchecked>Bird height</label><br>
+    <label><input type="checkbox" name="inputFeatures" value="pHeight" unchecked>Next pipe height</label><br>
     <label><input type="checkbox" name="inputFeatures" value="distance" checked>Distance to next pipe</label><br>
     <label><input type="checkbox" name="inputFeatures" value="diff" checked>Height difference to next pipe</label><br>
     <label><input type="checkbox" name="inputFeatures" value="velocity" unchecked>Bird velocity</label><br>

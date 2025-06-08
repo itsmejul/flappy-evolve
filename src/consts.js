@@ -1,7 +1,7 @@
 export const canvas = document.getElementById("gameCanvas");
 export const ctx = canvas.getContext("2d");
 
-let birdsPerEpoch = 100;
+let birdsPerEpoch = 200;
 let inputFeatures = ["diff", "distance"];
 let hiddenSize = 3;
 

@@ -30,17 +30,21 @@ export function generateNewBirdsGenetic(birds){
     .sort((a, b) => b.fitness - a.fitness);
 
     //best ten birds stay the same
-    for (let i = 0; i < 0; i ++){
-        nextGen.push(sortedBirds[0], sortedBirds[1]);
+    for (let i = 0; i < 10; i++){
+        sortedBirds[i].alive = true;
+        nextGen.push(sortedBirds[i]);
     }
     // Filter top 10 birds genomes
     const topGenomes = sortedBirds.slice(0, 10).map(bird => bird.genome);
     // Run crossover
-    while (nextGen.length < getBirdsPerEpoch()) {
+    while (nextGen.length < (getBirdsPerEpoch()/2)) {
     
         const parent1 = topGenomes[Math.floor(Math.random() * topGenomes.length)];
         const parent2 = topGenomes[Math.floor(Math.random() * topGenomes.length)];
         nextGen.push(new Bird(canvas.height / 2, crossover(parent1, parent2)));
+    }
+    while (nextGen.length < getBirdsPerEpoch()){
+      nextGen.push(new Bird(canvas.height / 2, randomGenome()));
     }
     birds = [];
     birds = nextGen;
